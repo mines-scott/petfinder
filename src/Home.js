@@ -1,22 +1,23 @@
 import React from 'react';
+
+import Circle from './Circle';
 import HomeDescriptionBox from './HomeDescriptionBox';
 import NavBar from './NavBar';
-import Circle from './Circle';
 
-function Home() {
-    const dogs = [
-        { id: 1, url: 'https://images.dog.ceo/breeds/cattledog-australian/IMG_5481.jpg' },
-        { id: 2, url: 'https://images.dog.ceo/breeds/mastiff-bull/n02108422_2052.jpg' },
-        { id: 3, url: 'https://images.dog.ceo/breeds/doberman/n02107142_21.jpg' },
-        { id: 4, url: 'https://images.dog.ceo/breeds/retriever-curly/n02099429_120.jpg' },
-    ];
+async function Home() {
+  let dogs =
+      await fetch('127.0.0.1:3001/pets').then((response) => response.text());
+  console.log(dogs);
+
     return (
         <div>
-            <NavBar customText="Home" />
+            <NavBar customText='Home' />
             <HomeDescriptionBox />
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{
+    display: 'flex', justifyContent: 'center' }}>
             {dogs.map((dog) => (
-                <Circle key={dog.id} url={dog.url} id={dog.id} />
+                <Circle key={dog.id} url={dog.url} id={
+      dog.id} />
             ))}
             </div>
         </div>
